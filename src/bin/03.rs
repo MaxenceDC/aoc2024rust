@@ -19,10 +19,13 @@ pub fn part_two(input: &str) -> Option<u32> {
     let mut s = 0;
     let pat = Regex::new(r"mul\((\d+),(\d+)\)|do\(\)()()|don't\(\)()()").unwrap();
     for c in pat.captures_iter(input).map(|c| c.extract::<2>()) {
-        if c.0 == "do()" { enabled = true; }
-        else if c.0 == "don't()" { enabled = false; }
-        else if !enabled { continue; }
-        else {
+        if c.0 == "do()" {
+            enabled = true;
+        } else if c.0 == "don't()" {
+            enabled = false;
+        } else if !enabled {
+            continue;
+        } else {
             let n = c.1;
             s += n[0].parse::<u32>().unwrap() * n[1].parse::<u32>().unwrap()
         }
