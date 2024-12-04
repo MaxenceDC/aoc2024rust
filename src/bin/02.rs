@@ -8,14 +8,13 @@ pub fn part_one(input: &str) -> Option<u32> {
     Some(
         input
             .lines()
-            .filter(|s|
+            .filter(|s| {
                 is_safe(
-                    &s
-                        .split_ascii_whitespace()
+                    &s.split_ascii_whitespace()
                         .map(|s| s.parse().unwrap())
                         .collect(),
                 )
-            )
+            })
             .count() as u32,
     )
 }
@@ -25,18 +24,24 @@ pub fn part_two(input: &str) -> Option<u32> {
         input
             .lines()
             .filter(|s| {
-                let v: Vec<u32> = s.split_ascii_whitespace().map(|s| s.parse().unwrap()).collect();
-                if is_safe(&v) { return true }
-                else {
+                let v: Vec<u32> = s
+                    .split_ascii_whitespace()
+                    .map(|s| s.parse().unwrap())
+                    .collect();
+                if is_safe(&v) {
+                    true
+                } else {
                     for i in 0..v.len() {
                         let mut new_v = v.clone();
                         new_v.remove(i);
-                        if is_safe(&new_v) { return true }
+                        if is_safe(&new_v) {
+                            return true;
+                        }
                     }
-                    return false
+                    false
                 }
             })
-            .count() as u32
+            .count() as u32,
     )
 }
 

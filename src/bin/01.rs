@@ -1,10 +1,8 @@
-use std::vec;
-
 advent_of_code::solution!(1);
 
 fn parse_input(input: &str) -> (Vec<u32>, Vec<u32>) {
-    let mut row1 = vec![];
-    let mut row2 = vec![];
+    let mut row1 = Vec::with_capacity(1000);
+    let mut row2 = Vec::with_capacity(1000);
     input.lines().for_each(|l| {
         let mut nums = l.split("   ").map(|n| n.parse::<u32>().unwrap());
         row1.push(nums.next().unwrap());
